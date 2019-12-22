@@ -9,4 +9,4 @@ Busca en la web oficial del Banco Central de Chile por los siguientes indicadore
 - Euro
 - TCM
 
-los guarda en una lista para poder sewr extraídos
+los guarda en una coleccion para poder sewr extraídos
