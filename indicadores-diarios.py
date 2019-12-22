@@ -1,8 +1,10 @@
 import requests
 from bs4 import BeautifulSoup
 from datetime import date
+import urllib3
+urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
 
-result = requests.get("https://www.bcentral.cl/")
+result = requests.get("http://www.bcentral.cl", verify=False)
 
 if result.status_code != 200:
 	print("No se pudo establecer comunicación con la web")
