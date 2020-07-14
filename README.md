@@ -9,4 +9,4 @@ Busca en la web oficial del Banco Central de Chile por los siguientes indicadore
 - Dólar
 - Euro
 
-los guarda en una coleccion para poder ser extraídos
+Crea una coleccion para poder ser extraídos
