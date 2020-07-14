@@ -1,30 +1,24 @@
 import requests
 from bs4 import BeautifulSoup
-from datetime import date
-import urllib3
-urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
 
-result = requests.get("http://www.bcentral.cl", verify=False)
+url = 'https://www.bcentral.cl'
+site = requests.get(url)
 
-if result.status_code != 200:
-    print("No se pudo establecer comunicación con la web")
+if site.status_code != 200:
+    print("Site is not available")
     quit()
 
-src = result.content
+soup = BeautifulSoup(site.content, 'html.parser')
 
-soup = BeautifulSoup(src, 'lxml')
+data = soup.find_all('p', class_='mb-0 text-center')
 
-div = soup.find_all("div", {"class": "tab-pane active", "id": "tab-1"})
+items = []
 
-tds = []
+for item in data:
+    if item.span == None:
+        items.append(item.string.strip())
 
-for table in div:
-    td_tag = table.find_all("td")
-    for td in td_tag:
-        tds.append(td.text)
-
-hoy = date.today()
-indicadores = {'Fecha': str(
-    hoy), "UF": tds[2], "UTM": tds[4], "Dolar": tds[6], "Euro": tds[8], "TCM": tds[10]}
+indicadores = {'UF': items[0], 'UTM': items[1],
+               'USD': items[2], 'EU': items[3]}
 
 print(indicadores)
